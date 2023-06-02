@@ -317,6 +317,8 @@ if __name__ == '__main__':
         list_acc, list_loss = [], []
         list_test_acc, list_test_loss = [], []
         global_model.eval()
+        for i in range(Client_number):
+            modle_list[i].eval()
         for c in range(args.num_users):
             local_model = LocalUpdate(args=args, dataset=train_dataset,
                                       idxs=user_groups[c])
