@@ -259,7 +259,7 @@ if __name__ == '__main__':
     ##改model 變成table 的model weight    
     ##每個client的model?
                     #w, loss = local_model.update_weights(model=modle_list[i], global_round=epoch)
-                    w, loss = local_model.update_weights(model=modle_list[i], global_round=new_epoch)
+                    w, loss = local_model.update_weights(model=copy.deepcopy(modle_list[i]), global_round=new_epoch)
                     modle_list[i].load_state_dict(w)
                     Ncom_local_weights.append(copy.deepcopy(w))
                     Ncom_local_losses.append(copy.deepcopy(loss))
@@ -269,7 +269,7 @@ if __name__ == '__main__':
                 if(Client_modle[i][1] == -1 ):
                     local_model = LocalUpdate(args=args, dataset=train_dataset, idxs=user_groups[i])
                     #w, loss = local_model.update_weights(model=modle_list[i], global_round=epoch)
-                    w, loss = local_model.update_weights(model=modle_list[i], global_round=new_epoch)
+                    w, loss = local_model.update_weights(model=copy.deepcopy(modle_list[i]), global_round=new_epoch)
                     com_local_weights.append(copy.deepcopy(w))
                     com_local_losses.append(copy.deepcopy(loss))
     
@@ -298,7 +298,7 @@ if __name__ == '__main__':
             for i in range(Client_number):
                 local_model = LocalUpdate(args=args, dataset=train_dataset, idxs=user_groups[i])
                 #w, loss = local_model.update_weights(model=modle_list[i], global_round=epoch)
-                w, loss = local_model.update_weights(model=modle_list[i], global_round=new_epoch)
+                w, loss = local_model.update_weights(model=copy.deepcopy(modle_list[i]), global_round=new_epoch)
                 com_local_weights.append(copy.deepcopy(w))
                 com_local_losses.append(copy.deepcopy(loss))
     
